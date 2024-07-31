@@ -38,6 +38,7 @@
     <applicationService serviceImplementation="org.c3lang.intellij.C3SettingsState"/>
     <configurationType implementation="org.c3lang.intellij.C3CompileRunConfigurationType"/>
     <configurationType implementation="org.c3lang.intellij.C3BuildRunConfigurationType"/>
+    <platform.lsp.serverSupportProvider implementation="org.c3lang.intellij.C3LspServerSupportProvider"/>
 
 <!--    <lang.refactoringSupport language="C3"
                              implementationClass="org.c3lang.intellij.C3RefactoringSupportProvider"/>
