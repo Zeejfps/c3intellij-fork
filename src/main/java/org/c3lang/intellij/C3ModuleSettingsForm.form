@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.c3lang.intellij.C3ModuleSettingsForm">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="6" vgap="20">
-    <margin top="20" left="20" bottom="20" right="20"/>
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="6" vgap="14">
+    <margin top="25" left="20" bottom="20" right="20"/>
     <constraints>
       <xy x="20" y="20" width="488" height="420"/>
     </constraints>
@@ -26,8 +26,8 @@
       </vspacer>
       <component id="8da8b" class="javax.swing.JTextField" binding="textField1" default-binding="true">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="273" height="-1"/>
           </grid>
         </constraints>
         <properties/>
@@ -48,17 +48,20 @@
           <text value="SDK:"/>
         </properties>
       </component>
-      <component id="af3ff" class="com.intellij.ui.ComboboxWithBrowseButton" binding="comboboxWithBrowseButton1" default-binding="true">
+      <component id="6c4ea" class="com.intellij.openapi.ui.TextFieldWithBrowseButton" binding="comboboxWithBrowseButton1" default-binding="true">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="12977" class="com.intellij.openapi.ui.TextFieldWithBrowseButton" binding="textFieldWithBrowseButton1" default-binding="true">
+      <component id="12977" class="com.intellij.openapi.ui.TextFieldWithBrowseButton" binding="cUsersZeejfLibraryTextFieldWithBrowseButton" default-binding="true">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="C:\Users\zeejf\Library"/>
+          <toolTipText value="project will be saved in: ~\library"/>
+        </properties>
       </component>
     </children>
   </grid>
