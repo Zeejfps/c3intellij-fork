@@ -6,9 +6,9 @@ import javax.swing.*;
 
 public class C3ModuleSettingsForm {
     private JPanel mainPanel;
-    private JTextField textField1;
-    private TextFieldWithBrowseButton comboboxWithBrowseButton1;
-    private TextFieldWithBrowseButton cUsersZeejfLibraryTextFieldWithBrowseButton;
+    private JTextField projectNameField;
+    private TextFieldWithBrowseButton compilerPathField;
+    private TextFieldWithBrowseButton projectLocationPathField;
 
     public JComponent getComponent() {
         return mainPanel;
