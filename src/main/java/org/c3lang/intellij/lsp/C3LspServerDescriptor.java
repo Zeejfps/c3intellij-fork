@@ -1,4 +1,4 @@
-package org.c3lang.intellij;
+package org.c3lang.intellij.lsp;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
