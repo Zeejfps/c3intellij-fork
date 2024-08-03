@@ -1,4 +1,4 @@
-package org.c3lang.intellij.module;
+package org.c3lang.intellij.projectWizard;
 
 import com.intellij.openapi.module.ModuleType;
 import org.c3lang.intellij.C3Icons;

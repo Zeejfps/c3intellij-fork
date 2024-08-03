@@ -1,4 +1,4 @@
-package org.c3lang.intellij.module;
+package org.c3lang.intellij.projectWizard;
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.Disposable;
@@ -20,7 +20,7 @@ public class C3ModuleWizardStep extends ModuleWizardStep implements Disposable {
 
     @Override
     public void updateDataModel() {
-
+        System.out.println("updateDataModel");
     }
 
     @Override
