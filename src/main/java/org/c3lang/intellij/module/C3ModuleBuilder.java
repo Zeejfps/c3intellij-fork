@@ -13,16 +13,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class C3ModuleBuilder extends ModuleBuilder {
 
-    
-    public void setupRootModel(ModifiableRootModel modifiableRootModel)
-            throws ConfigurationException {
-        
-        modifiableRootModel.clear();
-    }
+    private static final String BUILDER_ID = "c3builder"; 
+
 
     @Override
     public @Nullable @NonNls String getBuilderId() {
-        return "c3builder";
+        return BUILDER_ID;
     }
 
     @Override
@@ -38,29 +34,4 @@ public class C3ModuleBuilder extends ModuleBuilder {
         Disposer.register(parentDisposable, step);
         return step;
     }
-    
-//    @Override
-//    public boolean isTemplateBased() {
-//        return true;
-//    }
-
-//    @Override
-//    public ModuleWizardStep[] createWizardSteps(
-//            @NotNull WizardContext wizardContext,
-//            @NotNull ModulesProvider modulesProvider) {
-//        return new ModuleWizardStep[]{
-//                new C3ProjectWizardStep()
-//                new ModuleWizardStep() {
-//            @Override
-//            public JComponent getComponent() {
-//                return new JLabel("Put your content here");
-//            }
-//
-//            @Override
-//            public void updateDataModel() {
-//
-//            }
-//        }
-//        };
-//    }
 }
