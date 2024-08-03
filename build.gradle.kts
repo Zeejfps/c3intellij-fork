@@ -1,7 +1,6 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
-import org.jetbrains.grammarkit.tasks.GenerateParserTask
 
 fun properties(key: String) = providers.gradleProperty(key)
 fun environment(key: String) = providers.environmentVariable(key)
@@ -13,6 +12,7 @@ plugins {
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
     alias(libs.plugins.grammarkit)
+    id("org.jetbrains.kotlin.jvm") version "1.9.25"
 }
 
 group = properties("pluginGroup").get()
@@ -38,13 +38,13 @@ sourceSets {
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
 //    implementation(libs.annotations)
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 
@@ -169,5 +169,9 @@ tasks {
     compileJava {
         dependsOn(generateC3Lexer)
     }
-
+    
+    compileKotlin {
+        dependsOn(generateC3Lexer)
+    }
 }
+
