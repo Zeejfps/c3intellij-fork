@@ -10,6 +10,7 @@
 
   <!-- Product and plugin compatibility requirements -->
   <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.idea</depends>
   <!-- <depends optional="true" config-file="cidrdebugger.xml">com.intellij.modules.cidr.debugger</depends> -->
 
   <!-- Text to display as company information on Preferences/Settings | Plugin page -->
@@ -38,13 +39,14 @@
     <applicationService serviceImplementation="org.c3lang.intellij.C3SettingsState"/>
     <configurationType implementation="org.c3lang.intellij.C3CompileRunConfigurationType"/>
     <configurationType implementation="org.c3lang.intellij.C3BuildRunConfigurationType"/>
-    <moduleBuilder
-            builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"
-            id="c3builder"
-            order="first"/>
-    <moduleType
-            id="MY_MODULE"
-            implementationClass="org.c3lang.intellij.projectWizard.C3ModuleType"/>
+    <directoryProjectGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator" />
+<!--    <moduleBuilder-->
+<!--            builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"-->
+<!--            id="c3builder"-->
+<!--            order="first"/>-->
+<!--    <moduleType-->
+<!--            id="MY_MODULE"-->
+<!--            implementationClass="org.c3lang.intellij.projectWizard.C3ModuleType"/>-->
 <!--    <lang.refactoringSupport language="C3"
                              implementationClass="org.c3lang.intellij.C3RefactoringSupportProvider"/>
     <lang.findUsagesProvider language="C3"

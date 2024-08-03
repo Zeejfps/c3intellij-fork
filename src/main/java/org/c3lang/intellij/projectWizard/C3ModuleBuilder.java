@@ -1,9 +1,6 @@
 package org.c3lang.intellij.projectWizard;
 
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.WizardContext;
-import com.intellij.ide.util.projectWizard.WizardInputField;
+import com.intellij.ide.util.projectWizard.*;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
@@ -47,6 +44,17 @@ public class C3ModuleBuilder extends ModuleBuilder {
     }
 
     @Override
+    public @Nullable ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
+        
+        return null;
+    }
+    
+    @Override
+    public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep) {
+        return null;
+    }
+    
+    @Override
     protected @NotNull List<WizardInputField<?>> getAdditionalFields() {
         ArrayList<WizardInputField<?>> test = new ArrayList<WizardInputField<?>>();
         test.add(
@@ -68,5 +76,10 @@ public class C3ModuleBuilder extends ModuleBuilder {
             }
         );
         return test;
+    }
+
+    @Override
+    public boolean isTemplateBased() {
+        return true;
     }
 }
