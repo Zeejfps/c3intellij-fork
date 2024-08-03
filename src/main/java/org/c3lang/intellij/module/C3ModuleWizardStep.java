@@ -1,4 +1,4 @@
-package org.c3lang.intellij;
+package org.c3lang.intellij.module;
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.Disposable;

@@ -1,6 +1,7 @@
-package org.c3lang.intellij;
+package org.c3lang.intellij.module;
 
 import com.intellij.openapi.module.ModuleType;
+import org.c3lang.intellij.C3Icons;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.c3lang.intellij.C3ModuleSettingsForm">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.c3lang.intellij.module.C3ModuleSettingsForm">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="6" vgap="14">
     <margin top="25" left="20" bottom="20" right="20"/>
     <constraints>

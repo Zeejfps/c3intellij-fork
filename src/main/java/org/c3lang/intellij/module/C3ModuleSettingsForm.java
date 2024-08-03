@@ -1,4 +1,4 @@
-package org.c3lang.intellij;
+package org.c3lang.intellij.module;
 
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 

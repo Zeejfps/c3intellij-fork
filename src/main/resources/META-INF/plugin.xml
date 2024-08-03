@@ -39,12 +39,12 @@
     <configurationType implementation="org.c3lang.intellij.C3CompileRunConfigurationType"/>
     <configurationType implementation="org.c3lang.intellij.C3BuildRunConfigurationType"/>
     <moduleBuilder
-            builderClass="org.c3lang.intellij.C3ModuleBuilder"
+            builderClass="org.c3lang.intellij.module.C3ModuleBuilder"
             id="c3builder"
             order="first"/>
     <moduleType
             id="MY_MODULE"
-            implementationClass="org.c3lang.intellij.C3ModuleType"/>
+            implementationClass="org.c3lang.intellij.module.C3ModuleType"/>
 <!--    <lang.refactoringSupport language="C3"
                              implementationClass="org.c3lang.intellij.C3RefactoringSupportProvider"/>
     <lang.findUsagesProvider language="C3"
