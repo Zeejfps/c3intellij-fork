@@ -41,6 +41,7 @@
     <configurationType implementation="org.c3lang.intellij.C3BuildRunConfigurationType"/>
 <!--    <directoryProjectGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator" />-->
     <newProjectWizard.language implementation="org.c3lang.intellij.projectWizard.C3ProjectWizard"/>
+<!--    <com.intellij.newProjectWizard.languageGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator"/>-->
 <!--    <com.intellij.idea.com.intellij.ide.wizard.LanguageNewProjectWizard implementation = "org.c3lang.intellij.projectWizard.C3ProjectWizard"/>-->
 <!--    <moduleBuilder-->
 <!--            builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"-->

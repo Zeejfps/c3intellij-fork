@@ -7,7 +7,11 @@ import com.intellij.ide.wizard.NewProjectWizardStep;
 import com.intellij.openapi.observable.properties.PropertyGraph;
 import com.intellij.openapi.util.UserDataHolder;
 import com.intellij.ui.dsl.builder.Panel;
+import com.intellij.ui.dsl.builder.SegmentedButton;
+import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class C3ProjectWizard implements LanguageNewProjectWizard {
     @NotNull
@@ -51,5 +55,15 @@ class C3NewProjectWizardStep implements NewProjectWizardStep {
 
     @Override
     public void setupUI(@NotNull Panel builder) {
+        builder.row("Type", row -> {
+            ArrayList<String> buttons = new ArrayList<>();
+            buttons.add("bin");
+            buttons.add("lib");
+            row.segmentedButton(buttons, s -> {
+                return s;
+            });
+            
+            return Unit.INSTANCE;
+        });
     }
 }
