@@ -12,13 +12,12 @@ public class C3Sdk {
     static final String TEST_SDK_PATH = ""; 
     static final String COMPILER_EXE_NAME = "c3c.exe";
     
-    public void initBinaryProject(VirtualFile workDirectory) {
-        System.out.println(workDirectory);
+    public void initBinaryProject(VirtualFile projectPath, String projectName) {
         GeneralCommandLine cmdLine = new GeneralCommandLine();
         cmdLine.setExePath(FileUtil.toSystemDependentName(TEST_SDK_PATH + "/" + COMPILER_EXE_NAME));
-        cmdLine.setWorkDirectory(workDirectory.getPath());
+        cmdLine.setWorkDirectory(projectPath.getPath());
         cmdLine.addParameter("init");
-        cmdLine.addParameter("test_project");
+        cmdLine.addParameter(projectName);
         System.out.println(cmdLine.getCommandLineString());
         try {
             ColoredProcessHandler handler = new ColoredProcessHandler(cmdLine);
