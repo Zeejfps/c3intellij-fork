@@ -21,24 +21,24 @@ public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSet
     }
 
     @Override
-    public @Nullable Icon getLogo() {
-        return C3Icons.FILE;
-    }
-
-    @Override
-    public void generateProject(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull C3ProjectGeneratorSettings settings, @NotNull Module module) {
-        C3Sdk sdk = new C3Sdk();
-        sdk.initBinaryProject(virtualFile, settings.getProjectName());
-    }
-
-    @Override
     public @NlsContexts.DetailedDescription String getDescription() {
         return "Asdf";
     }
 
     @Override
+    public @Nullable Icon getLogo() {
+        return C3Icons.FILE;
+    }
+
+    @Override
     public @NotNull ProjectGeneratorPeer<C3ProjectGeneratorSettings> createPeer() {
         return new C3ProjectGeneratorPeer();
+    }
+
+    @Override
+    public void generateProject(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull C3ProjectGeneratorSettings settings, @NotNull Module module) {
+        C3Sdk sdk = new C3Sdk();
+        sdk.initBinaryProject(virtualFile, settings.getProjectName(), settings.getProjectKind());
     }
 }
 

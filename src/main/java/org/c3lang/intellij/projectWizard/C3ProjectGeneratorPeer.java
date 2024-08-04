@@ -20,11 +20,27 @@ import java.util.regex.Pattern;
 public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGeneratorSettings> {
 
     private JBTextField nameField;
+    private ComboBox<C3ProjectKind> projectKindComboBox;
     private List<SettingsListener> settingsListeners;
+    private C3ProjectGeneratorSettings settings;
     
     public C3ProjectGeneratorPeer() {
-        nameField = new JBTextField();
         settingsListeners = new ArrayList<>();
+        settings = new C3ProjectGeneratorSettings();
+
+        nameField = new JBTextField();
+        nameField.getDocument().addDocumentListener(new DocumentAdapter() {
+            @Override
+            protected void textChanged(@NotNull DocumentEvent documentEvent) {
+                NotifySettingsChanged();
+                settings.setProjectName(nameField.getText());
+            }
+        });
+
+        projectKindComboBox = new ComboBox<>(new EnumComboBoxModel<>(C3ProjectKind.class));
+        projectKindComboBox.addActionListener(e -> {
+            settings.setProjectKind(projectKindComboBox.getItem());
+        });
     }
 
     @Override
@@ -34,16 +50,8 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
 
     @Override
     public void buildUI(@NotNull SettingsStep settingsStep) {
-        System.out.println("BUILD UI");
-        nameField.getDocument().addDocumentListener(new DocumentAdapter() {
-            @Override
-            protected void textChanged(@NotNull DocumentEvent documentEvent) {
-                NotifySettingsChanged();
-            }
-        });
         settingsStep.addSettingsField("Name", nameField);
-        ComboBox<C3ProjectKind> comboBox = new ComboBox<>(new EnumComboBoxModel<>(C3ProjectKind.class));
-        settingsStep.addSettingsField("Kind", comboBox);
+        settingsStep.addSettingsField("Kind", projectKindComboBox);
     }
     
     private void NotifySettingsChanged() {
@@ -54,7 +62,7 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
 
     @Override
     public @NotNull C3ProjectGeneratorSettings getSettings() {
-        return new C3ProjectGeneratorSettings();
+        return settings;
     }
 
     @Override
