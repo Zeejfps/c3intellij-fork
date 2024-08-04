@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.platform.ProjectGeneratorPeer;
+import com.intellij.ui.components.JBTextField;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,8 +30,7 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
         JComponent test = (JComponent)panel.getComponent(1);
         LabeledComponent cmp = LabeledComponent.create(test, "Type", "West");
         settingsStep.addSettingsComponent(cmp);
-        settingsStep.addSettingsField("Why", new TextFieldWithBrowseButton());
-        settingsStep.addSettingsField("d", new JButton("Hi"));
+        settingsStep.addSettingsField("Name", new JBTextField());
     }
 
     @Override
