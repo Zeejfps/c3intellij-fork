@@ -3,6 +3,7 @@ package org.c3lang.intellij.projectWizard;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.platform.ProjectGeneratorPeer;
@@ -40,6 +41,17 @@ public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSet
     @Override
     public @NotNull ProjectGeneratorPeer<C3ProjectGeneratorSettings> createPeer() {
         return new C3ProjectGeneratorPeer();
+    }
+
+    @Override
+    public @Nullable ValidationInfo validateSettings() {
+        System.out.println("VALIDATE SETTINGS");
+        return super.validateSettings();
+    }
+
+    @Override
+    public boolean postponeValidation() {
+        return true;
     }
 }
 

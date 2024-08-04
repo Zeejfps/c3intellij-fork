@@ -1,8 +1,8 @@
 package org.c3lang.intellij.projectWizard;
 
 public enum C3ProjectKind {
-    Bin("init"),
-    Lib("init-lub");
+    Exe("init"),
+    Lib("init-lib");
     
     private final String command;
     
