@@ -23,6 +23,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGeneratorSettings> {
 
@@ -143,7 +145,17 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
     public @Nullable ValidationInfo validate() {
         String name = nameField.getText();
         if (name == null || name.isEmpty())
-            return new ValidationInfo("Not Valid?", nameField);
+            return new ValidationInfo("Project name can not be empty", nameField);
+
+        String regex = "^[a-zA-Z0-9_]+$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(name);
+
+        if (!matcher.matches()) {
+            return new ValidationInfo("Project name can only have letters, numbers, and _", nameField);
+        } 
+        
         return null;
     }
 
