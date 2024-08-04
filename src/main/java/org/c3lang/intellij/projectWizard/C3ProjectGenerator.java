@@ -19,7 +19,7 @@ public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSet
     public @NotNull @NlsContexts.Label String getName() {
         return "C3";
     }
-
+    
     @Override
     public @NlsContexts.DetailedDescription String getDescription() {
         return "Asdf";
@@ -36,9 +36,10 @@ public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSet
     }
 
     @Override
-    public void generateProject(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull C3ProjectGeneratorSettings settings, @NotNull Module module) {
+    public void generateProject(@NotNull Project project, @NotNull VirtualFile baseDir, @NotNull C3ProjectGeneratorSettings settings, @NotNull Module module) {
         C3Sdk sdk = new C3Sdk();
-        sdk.initBinaryProject(virtualFile, settings.getProjectName(), settings.getProjectKind());
+        String projectPath = baseDir.getPath();
+        sdk.initBinaryProject(projectPath, settings.getProjectName(), settings.getProjectKind());
     }
 }
 
