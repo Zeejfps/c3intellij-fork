@@ -2,6 +2,7 @@ package org.c3lang.intellij.projectWizard;
 
 import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.openapi.ui.DialogPanel;
+import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.platform.ProjectGeneratorPeer;
@@ -26,8 +27,10 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
         System.out.println("BUILD UI");
         DialogPanel panel = UitestKt.demoBasics();
         JComponent test = (JComponent)panel.getComponent(1);
-        settingsStep.addSettingsComponent(test);
-        settingsStep.addSettingsField("Test", test);
+        LabeledComponent cmp = LabeledComponent.create(test, "Type", "West");
+        settingsStep.addSettingsComponent(cmp);
+        settingsStep.addSettingsField("Why", new TextFieldWithBrowseButton());
+        settingsStep.addSettingsField("d", new JButton("Hi"));
     }
 
     @Override
