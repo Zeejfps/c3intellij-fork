@@ -1,4 +1,4 @@
-package org.c3lang.intellij;
+package org.c3lang.intellij.sdk;
 
 import com.intellij.openapi.projectRoots.*;
 import org.jdom.Element;
@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 

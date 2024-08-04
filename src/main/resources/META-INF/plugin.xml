@@ -28,7 +28,7 @@
 
     <lang.parserDefinition language="C3" implementationClass="org.c3lang.intellij.C3ParserDefinition"/>
     <lang.syntaxHighlighterFactory language="C3" implementationClass="org.c3lang.intellij.C3SyntaxHighlighterFactory"/>
-    <sdkType implementation="org.c3lang.intellij.C3SdkType"/>
+    <sdkType implementation="org.c3lang.intellij.sdk.C3SdkType"/>
     <lang.braceMatcher language="C3" implementationClass="org.c3lang.intellij.C3BraceMatcher"/>
     <completion.contributor language="C3" implementationClass="org.c3lang.intellij.C3CompletionContributor"/>
     <colorSettingsPage implementation="org.c3lang.intellij.C3ColorSettingsPage"/>
