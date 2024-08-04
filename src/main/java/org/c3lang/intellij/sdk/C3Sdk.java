@@ -4,6 +4,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.ColoredProcessHandler;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 
 public class C3Sdk {
     
@@ -11,9 +12,11 @@ public class C3Sdk {
     static final String TEST_SDK_PATH = ""; 
     static final String COMPILER_EXE_NAME = "c3c.exe";
     
-    public void initBinaryProject() {
+    public void initBinaryProject(VirtualFile workDirectory) {
+        System.out.println(workDirectory);
         GeneralCommandLine cmdLine = new GeneralCommandLine();
         cmdLine.setExePath(FileUtil.toSystemDependentName(TEST_SDK_PATH + "/" + COMPILER_EXE_NAME));
+        cmdLine.setWorkDirectory(workDirectory.getPath());
         cmdLine.addParameter("init");
         cmdLine.addParameter("test_project");
         System.out.println(cmdLine.getCommandLineString());

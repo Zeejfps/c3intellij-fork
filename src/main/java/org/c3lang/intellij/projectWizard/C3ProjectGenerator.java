@@ -7,6 +7,7 @@ import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.platform.ProjectGeneratorPeer;
 import org.c3lang.intellij.C3Icons;
+import org.c3lang.intellij.sdk.C3Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +27,9 @@ public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSet
 
     @Override
     public void generateProject(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull C3ProjectGeneratorSettings c3ProjectGeneratorSettings, @NotNull Module module) {
-
+        System.out.println("Generate Project: " + virtualFile);
+        C3Sdk sdk = new C3Sdk();
+        sdk.initBinaryProject(virtualFile);
     }
 
     @Override
