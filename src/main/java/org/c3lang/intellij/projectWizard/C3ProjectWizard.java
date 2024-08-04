@@ -1,6 +1,5 @@
 package org.c3lang.intellij.projectWizard;
 
-import com.intellij.ide.projectWizard.ProjectCategory;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.LanguageNewProjectWizard;
@@ -9,13 +8,12 @@ import com.intellij.ide.wizard.NewProjectWizardStep;
 import com.intellij.openapi.observable.properties.PropertyGraph;
 import com.intellij.openapi.util.UserDataHolder;
 import com.intellij.ui.dsl.builder.Panel;
-import com.intellij.ui.dsl.builder.SegmentedButton;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class C3ProjectWizard extends ProjectCategory implements LanguageNewProjectWizard {
+public class C3ProjectWizard implements LanguageNewProjectWizard {
     @NotNull
     @Override
     public String getName() {
@@ -26,11 +24,6 @@ public class C3ProjectWizard extends ProjectCategory implements LanguageNewProje
     @Override
     public NewProjectWizardStep createStep(@NotNull NewProjectWizardLanguageStep newProjectWizardLanguageStep) {
         return new C3NewProjectWizardStep();
-    }
-
-    @Override
-    public @NotNull ModuleBuilder createModuleBuilder() {
-        return new C3ModuleBuilder();
     }
 }
 

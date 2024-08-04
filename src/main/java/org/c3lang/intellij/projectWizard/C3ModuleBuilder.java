@@ -1,6 +1,6 @@
 package org.c3lang.intellij.projectWizard;
 
-import com.intellij.ide.projectWizard.ProjectSettingsStep;
+//import com.intellij.ide.projectWizard.ProjectSettingsStep;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.SettingsStep;
@@ -114,10 +114,10 @@ public class C3ModuleBuilder extends ModuleBuilder {
 //        return true;
 //    }
 
-    @Override
-    public @NotNull List<Class<? extends ModuleWizardStep>> getIgnoredSteps() {
-        return Collections.singletonList(ProjectSettingsStep.class);
-    }
+//    @Override
+//    public @NotNull List<Class<? extends ModuleWizardStep>> getIgnoredSteps() {
+//        return Collections.singletonList(ProjectSettingsStep.class);
+//    }
 
 //    @Override
 //    public ModuleWizardStep[] createFinishingSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {

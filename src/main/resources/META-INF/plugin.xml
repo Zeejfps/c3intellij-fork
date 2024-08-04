@@ -10,8 +10,8 @@
 
   <!-- Product and plugin compatibility requirements -->
   <depends>com.intellij.modules.platform</depends>
-  <depends>com.intellij.modules.idea</depends>
-  <depends>com.intellij.java</depends>
+<!--  <depends>com.intellij.modules.idea</depends>-->
+<!--  <depends>com.intellij.java</depends>-->
   <!-- <depends optional="true" config-file="cidrdebugger.xml">com.intellij.modules.cidr.debugger</depends> -->
 
   <!-- Text to display as company information on Preferences/Settings | Plugin page -->
@@ -41,14 +41,14 @@
     <configurationType implementation="org.c3lang.intellij.C3CompileRunConfigurationType"/>
     <configurationType implementation="org.c3lang.intellij.C3BuildRunConfigurationType"/>
 <!--    <projectWizard.projectCategory implementation="org.c3lang.intellij.projectWizard.C3ProjectWizard"/>-->
-<!--    <directoryProjectGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator" />-->
+    <directoryProjectGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator" />
 <!--    <newProjectWizard.language implementation="org.c3lang.intellij.projectWizard.C3ProjectWizard"/>-->
 <!--    <com.intellij.newProjectWizard.languageGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator"/>-->
 <!--    <com.intellij.idea.com.intellij.ide.wizard.LanguageNewProjectWizard implementation = "org.c3lang.intellij.projectWizard.C3ProjectWizard"/>-->
-    <moduleBuilder
-            builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"
-            id="c3builder"
-            order="first"/>
+<!--    <moduleBuilder-->
+<!--            builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"-->
+<!--            id="c3builder"-->
+<!--            order="first"/>-->
 <!--    <moduleType-->
 <!--            id="MY_MODULE"-->
 <!--            implementationClass="org.c3lang.intellij.projectWizard.C3ModuleType"/>-->

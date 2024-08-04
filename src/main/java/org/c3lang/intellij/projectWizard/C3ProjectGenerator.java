@@ -17,7 +17,7 @@ public class C3ProjectGenerator implements DirectoryProjectGenerator<C3ProjectGe
 
     @Override
     public @NotNull @NlsContexts.Label String getName() {
-        return "C3 Project Generator";
+        return "C3 project generator";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class C3ProjectGenerator implements DirectoryProjectGenerator<C3ProjectGe
 
     @Override
     public @NotNull ValidationResult validate(@NotNull String s) {
-        return null;
+        return ValidationResult.OK;
     }
     
     @Override
