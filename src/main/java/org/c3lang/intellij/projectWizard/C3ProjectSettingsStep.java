@@ -33,7 +33,7 @@ import java.util.function.Consumer;
 public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGeneratorSettings> {
 
     public C3ProjectSettingsStep(DirectoryProjectGenerator<C3ProjectGeneratorSettings> projectGenerator, AbstractNewProjectStep.AbstractCallback<C3ProjectGeneratorSettings> callback) {
-        super(projectGenerator, callback);
+        super(projectGenerator, new C3NewProjectStepCallback());
     }
 
     // NOTE(Zee): I need to hijack this here because I don't want to automatically have the IDE generate the folder

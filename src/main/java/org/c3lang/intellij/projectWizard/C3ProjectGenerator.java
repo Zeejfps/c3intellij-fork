@@ -1,10 +1,16 @@
 package org.c3lang.intellij.projectWizard;
 
+import com.intellij.ide.impl.TrustedPaths;
+import com.intellij.ide.util.projectWizard.AbstractNewProjectStep;
+import com.intellij.ide.util.projectWizard.CustomStepProjectGenerator;
 import com.intellij.ide.util.projectWizard.WebProjectTemplate;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ex.ProjectManagerEx;
 import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.wm.impl.welcomeScreen.AbstractActionWithPanel;
+import com.intellij.platform.DirectoryProjectGenerator;
 import com.intellij.platform.ProjectGeneratorPeer;
 import org.c3lang.intellij.C3Icons;
 import org.c3lang.intellij.sdk.C3Sdk;
@@ -12,8 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSettings> {
+public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSettings> implements CustomStepProjectGenerator<C3ProjectGeneratorSettings> {
 
     @Override
     public @NotNull @NlsContexts.Label String getName() {
@@ -37,9 +47,14 @@ public class C3ProjectGenerator extends WebProjectTemplate<C3ProjectGeneratorSet
 
     @Override
     public void generateProject(@NotNull Project project, @NotNull VirtualFile baseDir, @NotNull C3ProjectGeneratorSettings settings, @NotNull Module module) {
-        C3Sdk sdk = new C3Sdk();
-        String projectPath = baseDir.getPath();
-        sdk.initBinaryProject(projectPath, settings.getProjectName(), settings.getProjectKind());
+        // NOTE(Zee): this is all handled in the C3ProjectSettingsStep
+    }
+    
+    @Override
+    public AbstractActionWithPanel createStep(DirectoryProjectGenerator<C3ProjectGeneratorSettings> directoryProjectGenerator, 
+                                              AbstractNewProjectStep.AbstractCallback<C3ProjectGeneratorSettings> abstractCallback) {
+        
+        return new C3ProjectSettingsStep(directoryProjectGenerator, abstractCallback);
     }
 }
 
