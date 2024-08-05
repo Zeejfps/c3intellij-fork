@@ -58,17 +58,24 @@ public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGene
 
             createProjectPathDirectories(projectPath);
             
-            sdk.initBinaryProject(projectPath.toString(), projectName, actualSettings.getProjectKind());
+            C3ProjectKind projectKind = actualSettings.getProjectKind();
+            
+            sdk.initBinaryProject(projectPath.toString(), projectName, projectKind);
 
+            if (projectKind == C3ProjectKind.Lib) {
+                fullProjectPath = Path.of(projectPath.toString(), projectName + ".c3l");
+            }
+
+            Path finalFullProjectPath = fullProjectPath;
             VirtualFile baseDir = WriteAction.compute(() -> LocalFileSystem.getInstance()
-                    .refreshAndFindFileByPath(FileUtil.toSystemIndependentName(fullProjectPath.toString())));
+                    .refreshAndFindFileByPath(FileUtil.toSystemIndependentName(finalFullProjectPath.toString())));
             
             VfsUtil.markDirtyAndRefresh(false, true, true, baseDir);
 
             RecentProjectsManager.getInstance().setLastProjectCreationLocation(projectPath);
 
-            TrustedPaths.getInstance().setProjectPathTrusted(fullProjectPath, true);
-            ProjectManagerEx.getInstanceEx().openProject(fullProjectPath, openProjectTask);
+            TrustedPaths.getInstance().setProjectPathTrusted(finalFullProjectPath, true);
+            ProjectManagerEx.getInstanceEx().openProject(finalFullProjectPath, openProjectTask);
         }
 
         private void createProjectPathDirectories(Path path) {
