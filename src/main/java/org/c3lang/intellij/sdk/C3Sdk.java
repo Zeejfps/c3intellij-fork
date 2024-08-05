@@ -12,7 +12,7 @@ public class C3Sdk {
     static final String TEST_SDK_PATH = ""; 
     static final String COMPILER_EXE_NAME = "c3c.exe";
     
-    public void initBinaryProject(String projectPath, String projectName, C3ProjectKind kind) {
+    public ColoredProcessHandler initBinaryProject(String projectPath, String projectName, C3ProjectKind kind) {
         GeneralCommandLine cmdLine = new GeneralCommandLine();
         cmdLine.setExePath(FileUtil.toSystemDependentName(TEST_SDK_PATH + "/" + COMPILER_EXE_NAME));
         cmdLine.setWorkDirectory(projectPath);
@@ -21,6 +21,7 @@ public class C3Sdk {
         System.out.println(cmdLine.getCommandLineString());
         try {
             ColoredProcessHandler handler = new ColoredProcessHandler(cmdLine);
+            return handler;
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }

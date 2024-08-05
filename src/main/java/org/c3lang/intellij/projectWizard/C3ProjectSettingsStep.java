@@ -1,12 +1,18 @@
 package org.c3lang.intellij.projectWizard;
 
+import com.intellij.execution.process.ColoredProcessHandler;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
 import com.intellij.ide.RecentProjectsManager;
 import com.intellij.ide.impl.OpenProjectTask;
 import com.intellij.ide.impl.OpenProjectTaskKt;
 import com.intellij.ide.impl.TrustedPaths;
 import com.intellij.ide.util.projectWizard.AbstractNewProjectStep;
 import com.intellij.ide.util.projectWizard.ProjectSettingsStepBase;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ex.ProjectManagerEx;
 import com.intellij.openapi.util.Key;
@@ -39,12 +45,11 @@ public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGene
     // NOTE(Zee): I need to hijack this here because I don't want to automatically have the IDE generate the folder
     static class C3NewProjectStepCallback extends AbstractNewProjectStep.AbstractCallback<C3ProjectGeneratorSettings> {
         @Override
-        public void consume(@Nullable ProjectSettingsStepBase<C3ProjectGeneratorSettings> settings, 
+        public void consume(@Nullable ProjectSettingsStepBase<C3ProjectGeneratorSettings> settingsStep, 
                             @NotNull ProjectGeneratorPeer<C3ProjectGeneratorSettings> projectGeneratorPeer) {
 
-            DirectoryProjectGenerator<C3ProjectGeneratorSettings> generator = settings.getProjectGenerator();
             C3ProjectGeneratorSettings actualSettings = projectGeneratorPeer.getSettings();
-            String fullProjectPathStr = settings.getProjectLocation();
+            String fullProjectPathStr = settingsStep.getProjectLocation();
             Path fullProjectPath = Paths.get(fullProjectPathStr);
 
             C3Sdk sdk = new C3Sdk();
@@ -55,32 +60,48 @@ public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGene
             
             C3ProjectKind projectKind = actualSettings.getProjectKind();
             
-            sdk.initBinaryProject(projectPath.toString(), projectName, projectKind);
+            ColoredProcessHandler processHandler = sdk.initBinaryProject(projectPath.toString(), projectName, projectKind);
+            processHandler.addProcessListener(new ProcessAdapter() {
+                @Override
+                public void processTerminated(@NotNull ProcessEvent event) {
+                    Path finalFullProjectPath = fullProjectPath;
+                    if (projectKind == C3ProjectKind.Lib) {
+                        finalFullProjectPath = Path.of(projectPath.toString(), projectName + ".c3l");
+                    }
 
-            if (projectKind == C3ProjectKind.Lib) {
-                fullProjectPath = Path.of(projectPath.toString(), projectName + ".c3l");
-            }
+                    System.out.println(finalFullProjectPath.toString());
+                    VirtualFile baseDir = LocalFileSystem.getInstance().refreshAndFindFileByPath(FileUtil.toSystemIndependentName(finalFullProjectPath.toString()));
 
-            Path finalFullProjectPath = fullProjectPath;
-            VirtualFile baseDir = WriteAction.compute(() -> LocalFileSystem.getInstance()
-                    .refreshAndFindFileByPath(FileUtil.toSystemIndependentName(finalFullProjectPath.toString())));
-            
-            VfsUtil.markDirtyAndRefresh(false, true, true, baseDir);
-            RecentProjectsManager.getInstance().setLastProjectCreationLocation(projectPath);
+                    VfsUtil.markDirtyAndRefresh(false, true, true, baseDir);
+                    RecentProjectsManager.getInstance().setLastProjectCreationLocation(projectPath);
 
-            setProjectAsTrusted(finalFullProjectPath);
-            openProject(finalFullProjectPath);
+                    setProjectAsTrusted(finalFullProjectPath);
+                    Project project = openProject(finalFullProjectPath);
+
+                    VirtualFile mainFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(FileUtil.toSystemIndependentName(Path.of(finalFullProjectPath.toString(), "src", "main.c3").toString()));
+                    System.out.println("Main File: " + mainFile);
+
+                    if (mainFile != null) {
+                        ApplicationManager.getApplication().invokeAndWait(() -> {
+                            final FileEditorManager manager = FileEditorManager.getInstance(project);
+                            manager.openFile(mainFile, true);
+                        });
+                    }
+                }
+            });
+
+            processHandler.startNotify();        
         }
         
         private void setProjectAsTrusted(Path projectPath) {
             TrustedPaths.getInstance().setProjectPathTrusted(projectPath, true);
         }
         
-        private void openProject(Path projectPath) {
+        private Project openProject(Path projectPath) {
             IdeFrame frame = IdeFocusManager.getGlobalInstance().getLastFocusedFrame();
             Project projectToClose = frame != null ? frame.getProject() : null;
             OpenProjectTask openProjectTask = createOpenProjectOptions(projectToClose, null);
-            ProjectManagerEx.getInstanceEx().openProject(projectPath, openProjectTask);
+            return ProjectManagerEx.getInstanceEx().openProject(projectPath, openProjectTask);
         }
 
         private void createProjectPathDirectories(Path path) {
