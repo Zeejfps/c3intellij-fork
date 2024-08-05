@@ -42,17 +42,12 @@ public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGene
         public void consume(@Nullable ProjectSettingsStepBase<C3ProjectGeneratorSettings> settings, 
                             @NotNull ProjectGeneratorPeer<C3ProjectGeneratorSettings> projectGeneratorPeer) {
 
-            System.out.println("Consume?");
-            IdeFrame frame = IdeFocusManager.getGlobalInstance().getLastFocusedFrame();
-            Project projectToClose = frame != null ? frame.getProject() : null;
             DirectoryProjectGenerator<C3ProjectGeneratorSettings> generator = settings.getProjectGenerator();
             C3ProjectGeneratorSettings actualSettings = projectGeneratorPeer.getSettings();
-            OpenProjectTask openProjectTask = createOpenProjectOptions(projectToClose, null);
             String fullProjectPathStr = settings.getProjectLocation();
             Path fullProjectPath = Paths.get(fullProjectPathStr);
 
             C3Sdk sdk = new C3Sdk();
-            
             Path projectPath = fullProjectPath.getParent();
             String projectName = fullProjectPath.getFileName().toString();
 
@@ -71,11 +66,21 @@ public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGene
                     .refreshAndFindFileByPath(FileUtil.toSystemIndependentName(finalFullProjectPath.toString())));
             
             VfsUtil.markDirtyAndRefresh(false, true, true, baseDir);
-
             RecentProjectsManager.getInstance().setLastProjectCreationLocation(projectPath);
 
-            TrustedPaths.getInstance().setProjectPathTrusted(finalFullProjectPath, true);
-            ProjectManagerEx.getInstanceEx().openProject(finalFullProjectPath, openProjectTask);
+            setProjectAsTrusted(finalFullProjectPath);
+            openProject(finalFullProjectPath);
+        }
+        
+        private void setProjectAsTrusted(Path projectPath) {
+            TrustedPaths.getInstance().setProjectPathTrusted(projectPath, true);
+        }
+        
+        private void openProject(Path projectPath) {
+            IdeFrame frame = IdeFocusManager.getGlobalInstance().getLastFocusedFrame();
+            Project projectToClose = frame != null ? frame.getProject() : null;
+            OpenProjectTask openProjectTask = createOpenProjectOptions(projectToClose, null);
+            ProjectManagerEx.getInstanceEx().openProject(projectPath, openProjectTask);
         }
 
         private void createProjectPathDirectories(Path path) {
