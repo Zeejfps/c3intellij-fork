@@ -1,5 +1,6 @@
 package org.c3lang.intellij.projectWizard;
 
+import com.intellij.ide.util.projectWizard.ModuleNameLocationSettings;
 import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -20,25 +21,19 @@ import java.util.regex.Pattern;
 
 public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGeneratorSettings> {
 
-    private final JBTextField nameField;
+    private static final Pattern moduleNamePattern = Pattern.compile("^[a-zA-Z0-9_]+$");
+
     private final ComboBox<C3ProjectKind> projectKindComboBox;
     private final List<SettingsListener> settingsListeners;
     private final TextFieldWithBrowseButton compilerField;
     private final C3ProjectGeneratorSettings settings;
     
+    private SettingsStep settingsStep;
+    
     public C3ProjectGeneratorPeer() {
         settingsListeners = new ArrayList<>();
         settings = new C3ProjectGeneratorSettings();
-
-        nameField = new JBTextField();
-        nameField.getDocument().addDocumentListener(new DocumentAdapter() {
-            @Override
-            protected void textChanged(@NotNull DocumentEvent documentEvent) {
-                NotifySettingsChanged();
-                settings.setProjectName(nameField.getText());
-            }
-        });
-
+        
         projectKindComboBox = new ComboBox<>(new EnumComboBoxModel<>(C3ProjectKind.class));
         projectKindComboBox.addActionListener(e -> {
             settings.setProjectKind(projectKindComboBox.getItem());
@@ -54,7 +49,7 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
 
     @Override
     public void buildUI(@NotNull SettingsStep settingsStep) {
-        settingsStep.addSettingsField("Name", nameField);
+        this.settingsStep = settingsStep;
         settingsStep.addSettingsField("Kind", projectKindComboBox);
         settingsStep.addSettingsField("Compiler", compilerField);
     }
@@ -72,17 +67,18 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
 
     @Override
     public @Nullable ValidationInfo validate() {
-        String name = nameField.getText();
-        if (name == null || name.isEmpty())
-            return new ValidationInfo("Project name can not be empty", nameField);
+        ModuleNameLocationSettings nameLocationSettings = settingsStep.getModuleNameLocationSettings();
+        if (nameLocationSettings == null) {
+            throw new RuntimeException("No name or location settings found");
+        }
+        
+        String name = nameLocationSettings.getModuleName();
+        if (name.isEmpty())
+            return new ValidationInfo("Project name can not be empty");
 
-        String regex = "^[a-zA-Z0-9_]+$";
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(name);
-
+        Matcher matcher = moduleNamePattern.matcher(name);
         if (!matcher.matches()) {
-            return new ValidationInfo("Project name can only have letters, numbers, and _", nameField);
+            return new ValidationInfo("Project name can only have letters, numbers, and _");
         } 
         
         return null;
