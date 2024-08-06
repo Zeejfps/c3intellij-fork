@@ -65,6 +65,7 @@ public class C3ProjectGeneratorPeer implements ProjectGeneratorPeer<C3ProjectGen
             @Override
             protected void textChanged(@NotNull DocumentEvent documentEvent) {
                 NotifySettingsChanged();
+                C3SettingsState.getInstance().sdk = compilerField.getText();
             }
         });
     }
