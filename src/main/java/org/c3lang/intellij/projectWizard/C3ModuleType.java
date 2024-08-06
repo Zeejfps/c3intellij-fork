@@ -22,7 +22,7 @@ public class C3ModuleType extends ModuleType<C3ModuleBuilder> {
 
     @Override
     public @NotNull @Nls(capitalization = Nls.Capitalization.Title) String getName() {
-        return "C3 bin";
+        return "C3";
     }
 
     @Override

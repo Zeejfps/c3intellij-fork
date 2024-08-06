@@ -48,6 +48,7 @@ public class C3ProjectSettingsStep extends ProjectSettingsStepBase<C3ProjectGene
         public void consume(@Nullable ProjectSettingsStepBase<C3ProjectGeneratorSettings> settingsStep, 
                             @NotNull ProjectGeneratorPeer<C3ProjectGeneratorSettings> projectGeneratorPeer) {
 
+            // NOTE(Zee): This is some ugly ass code below and I am sorry
             C3ProjectGeneratorSettings actualSettings = projectGeneratorPeer.getSettings();
             String fullProjectPathStr = settingsStep.getProjectLocation();
             Path fullProjectPath = Paths.get(fullProjectPathStr);

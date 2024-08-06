@@ -1,29 +1,17 @@
 package org.c3lang.intellij.projectWizard;
 
-//import com.intellij.ide.projectWizard.ProjectSettingsStep;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
-import com.intellij.openapi.ui.DialogPanel;
-import com.intellij.openapi.util.Disposer;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 public class C3ModuleBuilder extends ModuleBuilder {
 
     private static final String BUILDER_ID = "c3builder";
-
 
     @Override
     public @Nullable @NonNls String getBuilderId() {
@@ -34,27 +22,22 @@ public class C3ModuleBuilder extends ModuleBuilder {
     public ModuleType<?> getModuleType() {
         return C3ModuleType.getInstance();
     }
+    
 
-    @Override
-    public boolean isOpenProjectSettingsAfter() {
-        return false;
-    }
-
-    @Nullable
-    @Override
-    public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
-        return new ModuleWizardStep() {
-            @Override
-            public JComponent getComponent() {
-                DialogPanel panel = UitestKt.demoBasics();
-                return panel;
-            }
-
-            @Override
-            public void updateDataModel() {
-
-            }
-        };
+//    @Nullable
+//    @Override
+//    public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
+//        return new ModuleWizardStep() {
+//            @Override
+//            public JComponent getComponent() {
+//                return panel;
+//            }
+//
+//            @Override
+//            public void updateDataModel() {
+//
+//            }
+//        };
 
 //        return super.getCustomOptionsStep()
 //        final C3ModuleWizardStep step = new C3ModuleWizardStep();
@@ -64,7 +47,7 @@ public class C3ModuleBuilder extends ModuleBuilder {
 //        return null;
 //            return new ProjectSettingsStep(context);
 //        return null;
-    }
+//    }
 
     @Override
     public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
