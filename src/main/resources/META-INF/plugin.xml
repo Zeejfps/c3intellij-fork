@@ -38,11 +38,10 @@
     <applicationService serviceImplementation="org.c3lang.intellij.C3SettingsState"/>
     <configurationType implementation="org.c3lang.intellij.C3CompileRunConfigurationType"/>
     <configurationType implementation="org.c3lang.intellij.C3BuildRunConfigurationType"/>
+    
     <directoryProjectGenerator implementation="org.c3lang.intellij.projectWizard.C3ProjectGenerator" />
-    <moduleBuilder
-            builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"
-            id="c3builder"
-            order="first"/>
+<!--    <moduleBuilder builderClass="org.c3lang.intellij.projectWizard.C3ModuleBuilder"/>-->
+    <newProjectWizard.language implementation="org.c3lang.intellij.projectWizard.C3NewProjectWizard"/>
 <!--    <lang.refactoringSupport language="C3"
                              implementationClass="org.c3lang.intellij.C3RefactoringSupportProvider"/>
     <lang.findUsagesProvider language="C3"

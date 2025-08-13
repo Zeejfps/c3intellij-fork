@@ -2,9 +2,13 @@ package org.c3lang.intellij.projectWizard;
 
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
+import com.intellij.ide.util.projectWizard.SettingsStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
+import com.intellij.openapi.ui.ComboBox;
+import com.intellij.ui.EnumComboBoxModel;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,20 +28,11 @@ public class C3ModuleBuilder extends ModuleBuilder {
     }
     
 
-//    @Nullable
-//    @Override
-//    public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
-//        return new ModuleWizardStep() {
-//            @Override
-//            public JComponent getComponent() {
-//                return panel;
-//            }
-//
-//            @Override
-//            public void updateDataModel() {
-//
-//            }
-//        };
+    @Nullable
+    @Override
+    public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
+        return null;
+    }
 
 //        return super.getCustomOptionsStep()
 //        final C3ModuleWizardStep step = new C3ModuleWizardStep();
@@ -54,17 +49,18 @@ public class C3ModuleBuilder extends ModuleBuilder {
         return ModuleWizardStep.EMPTY_ARRAY;
     }
 
-//    @Override
-//    public @Nullable ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
-//        DialogPanel panel = UitestKt.demoBasics();
-//        settingsStep.addSettingsComponent(panel);
-//        return null;
-//    }
+    @Override
+    public @Nullable ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
+        ComboBox<C3ProjectKind> projectKindComboBox = new ComboBox<>(new EnumComboBoxModel<>(C3ProjectKind.class));
+        settingsStep.addSettingsField("Kind", projectKindComboBox);
+        return null;
+    }
 
-//    @Override
-//    public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep) {
-//        return null;
-//    }
+    @Override
+    public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep) {
+        
+        return null;
+    }
     
 //    @Override
 //    protected @NotNull List<WizardInputField<?>> getAdditionalFields() {
